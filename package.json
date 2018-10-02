@@ -1,0 +1,36 @@
+{
+  "name": "createjs-cache-util",
+  "version": "0.0.1",
+  "main": "./bin/createjs-text-cache.js",
+  "types": "./bin/createjs-text-cache.d.ts",
+  "repository": "https://MasatoMakino@github.com/MasatoMakino/createjs-cache-util.git",
+  "author": "MasatoMakino <unagiinu.g@gmail.com>",
+  "description": "Bitmap Cache Utility for Createjs.text",
+  "keywords": [
+    "createjs"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "@types/easeljs": "^1.0.0"
+  },
+  "devDependencies": {
+    "cpx": "^1.5.0",
+    "easeljs": "^1.0.2",
+    "http-server": "^0.11.1",
+    "husky": "^1.1.0",
+    "prettier": "^1.14.3",
+    "pretty-quick": "^1.7.0",
+    "typescript": "^3.1.1"
+  },
+  "scripts": {
+    "build": "tsc && npm run copy",
+    "copy": "cpx './bin/**/*.js' ./example",
+    "server": "http-server ./example/ -o",
+    "prettyQuick": "pretty-quick --staged"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run prettyQuick"
+    }
+  }
+}
