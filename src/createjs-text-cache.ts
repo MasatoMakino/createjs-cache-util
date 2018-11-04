@@ -41,8 +41,8 @@ export class CreatejsCacheUtil {
       margin?: number;
       color?: string;
     }
-  ): boolean {
-    if (!target) return false;
+  ): void {
+    if (!target) return;
 
     //optionのデフォルト値を追加。
     if (!option) {
@@ -59,12 +59,13 @@ export class CreatejsCacheUtil {
     let isSame: boolean = true;
     const isSameString: boolean = target.text === value;
     if (!isSameString) isSame = false;
+
     if (target.color !== option.color) {
       isSame = false;
     }
     if (isSame) {
       //状態が全く同じなら更新をせずに終了
-      return false;
+      return;
     }
 
     //文字とカラーの更新
@@ -76,7 +77,7 @@ export class CreatejsCacheUtil {
     //すでにキャッシュ済みで同じ文字列を入力するならキャッシュの更新で終了
     if (target.cacheCanvas && isSameString) {
       target.updateCache();
-      return true;
+      return;
     }
 
     //キャッシュのサイズ更新が必要な場合はアンキャッシュを行う。
@@ -89,7 +90,7 @@ export class CreatejsCacheUtil {
       if (target.cacheCanvas) {
         target.uncache();
       }
-      return false;
+      return;
     }
 
     //文言が異なる場合は再キャッシュ。
@@ -99,6 +100,5 @@ export class CreatejsCacheUtil {
       bounds.width + option.margin * 2,
       bounds.height + option.margin * 2
     );
-    return true;
   }
 }

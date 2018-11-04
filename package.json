@@ -14,23 +14,32 @@
     "@types/easeljs": "^1.0.0"
   },
   "devDependencies": {
-    "cpx": "^1.5.0",
+    "@babel/core": "^7.1.2",
+    "@babel/preset-env": "^7.1.0",
+    "babel-loader": "^8.0.4",
+    "browser-sync": "^2.26.3",
     "easeljs": "^1.0.2",
-    "http-server": "^0.11.1",
     "husky": "^1.1.0",
     "prettier": "^1.14.3",
-    "pretty-quick": "^1.7.0",
-    "typescript": "^3.1.1"
+    "replace-in-file": "^3.4.2",
+    "typescript": "^3.1.1",
+    "typedoc": "^0.13.0",
+    "webpack": "^4.23.1",
+    "webpack-cli": "^3.1.2"
   },
   "scripts": {
-    "build": "tsc && npm run copy",
-    "copy": "cpx './bin/**/*.js' ./example",
-    "server": "http-server ./example/ -o",
-    "prettyQuick": "pretty-quick --staged"
+    "build": "npm run prettier:src && tsc && npm run babel && npm run doc",
+    "prettier:src": "prettier --write './!(bin)/**/*.{js,ts,json}' ",
+    "babel": "webpack --mode development --module-bind js=babel-loader ./docs/demo/main.js --output ./docs/demo/bundle.js",
+    "watch:server": "node task/browsersync.js development",
+    "server": "node task/browsersync.js production",
+    "doc": "npm run doc:generate && npm run doc:replaceNode",
+    "doc:generate": "typedoc --tsconfig tsdocconfig.json src",
+    "doc:replaceNode": "node ./task/replaceAPI.js"
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm run prettyQuick"
+      "pre-commit": "npm run build"
     }
   }
 }

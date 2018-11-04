@@ -1,4 +1,4 @@
-import { CreatejsCacheUtil } from "./createjs-text-cache.js";
+import { CreatejsCacheUtil } from "../../bin/createjs-text-cache";
 
 const onDomContentsLoaded = () => {
   //FPSメーターの生成と配置
