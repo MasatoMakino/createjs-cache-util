@@ -1,6 +1,5 @@
 import DisplayObject = createjs.DisplayObject;
 import Text = createjs.Text;
-import Rectangle = createjs.Rectangle;
 
 export class CreatejsCacheUtil {
   /**
@@ -17,8 +16,7 @@ export class CreatejsCacheUtil {
     target.filters = filters;
 
     if (!target.cacheCanvas) {
-      const bounds = target.getBounds();
-      this.cacheWithMargin(target, bounds, margin);
+      this.refreshCache(target, margin);
     } else {
       target.updateCache();
     }
@@ -51,28 +49,25 @@ export class CreatejsCacheUtil {
       return;
     }
 
+    this.refreshCache(target, option.margin);
+  }
+
+  /**
+   * 対象のディスプレイオブジェクトを、指定されたマージンの範囲でキャッシュする。
+   * キャッシュはupdateではなくuncacheを行い、キャッシュサイズも変更する。
+   *
+   * @param {createjs.DisplayObject} target
+   * @param {number} margin
+   */
+  private static refreshCache(target: DisplayObject, margin: number): void {
     //キャッシュのサイズ更新が必要な場合はアンキャッシュを行う。
     //アンキャッシュ前にgetBoundsを呼ぶと、変更済みのサイズではなくキャッシュのバウンディングボックスが返ってくるため。
     target.uncache();
     const bounds = target.getBounds();
 
-    //空文字などサイズが計測不能な場合はキャッシュするのを諦めて処理を中断。
+    //targetが空文字などサイズが計測不能な場合はキャッシュするのを諦めて処理を中断。
     if (bounds == null) return;
 
-    this.cacheWithMargin(target, bounds, option.margin);
-  }
-
-  /**
-   * 対象のディスプレイオブジェクトを、指定されたバウンディングボックスの範囲でキャッシュする。
-   * @param {createjs.DisplayObject} target
-   * @param {createjs.Rectangle} bounds
-   * @param {number} margin
-   */
-  private static cacheWithMargin(
-    target: DisplayObject,
-    bounds: Rectangle,
-    margin: number
-  ): void {
     target.cache(
       bounds.x - margin,
       bounds.y - margin,

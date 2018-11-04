@@ -85,8 +85,8 @@
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><a href="_createjs_text_cache_.createjscacheutil.html#cachetext" class="tsd-kind-icon">cache<wbr>Text</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private tsd-is-static"><a href="_createjs_text_cache_.createjscacheutil.html#cachewithmargin" class="tsd-kind-icon">cache<wbr>With<wbr>Margin</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private tsd-is-static"><a href="_createjs_text_cache_.createjscacheutil.html#isneedupdate" class="tsd-kind-icon">is<wbr>Need<wbr>Update</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private tsd-is-static"><a href="_createjs_text_cache_.createjscacheutil.html#refreshcache" class="tsd-kind-icon">refresh<wbr>Cache</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><a href="_createjs_text_cache_.createjscacheutil.html#setfilter" class="tsd-kind-icon">set<wbr>Filter</a></li>
 							</ul>
 						</section>
@@ -105,7 +105,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/MasatoMakino/createjs-cache-util/blob/0734849/src/createjs-text-cache.ts#L34">createjs-text-cache.ts:34</a></li>
+									<li>Defined in <a href="https://github.com/MasatoMakino/createjs-cache-util/blob/a6d3dc0/src/createjs-text-cache.ts#L32">createjs-text-cache.ts:32</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -134,42 +134,6 @@
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private tsd-is-static">
-					<a name="cachewithmargin" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagStatic">Static</span> <span class="tsd-flag ts-flagPrivate">Private</span> cache<wbr>With<wbr>Margin</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private tsd-is-static">
-						<li class="tsd-signature tsd-kind-icon">cache<wbr>With<wbr>Margin<span class="tsd-signature-symbol">(</span>target<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">DisplayObject</span>, bounds<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Rectangle</span>, margin<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/MasatoMakino/createjs-cache-util/blob/0734849/src/createjs-text-cache.ts#L71">createjs-text-cache.ts:71</a></li>
-								</ul>
-							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>対象のディスプレイオブジェクトを、指定されたバウンディングボックスの範囲でキャッシュする。</p>
-								</div>
-							</div>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>target: <span class="tsd-signature-type">DisplayObject</span></h5>
-								</li>
-								<li>
-									<h5>bounds: <span class="tsd-signature-type">Rectangle</span></h5>
-								</li>
-								<li>
-									<h5>margin: <span class="tsd-signature-type">number</span></h5>
-									<div class="tsd-comment tsd-typography">
-									</div>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private tsd-is-static">
 					<a name="isneedupdate" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagStatic">Static</span> <span class="tsd-flag ts-flagPrivate">Private</span> is<wbr>Need<wbr>Update</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private tsd-is-static">
@@ -179,7 +143,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/MasatoMakino/createjs-cache-util/blob/0734849/src/createjs-text-cache.ts#L93">createjs-text-cache.ts:93</a></li>
+									<li>Defined in <a href="https://github.com/MasatoMakino/createjs-cache-util/blob/a6d3dc0/src/createjs-text-cache.ts#L88">createjs-text-cache.ts:88</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -204,6 +168,40 @@
 						</li>
 					</ul>
 				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private tsd-is-static">
+					<a name="refreshcache" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagStatic">Static</span> <span class="tsd-flag ts-flagPrivate">Private</span> refresh<wbr>Cache</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private tsd-is-static">
+						<li class="tsd-signature tsd-kind-icon">refresh<wbr>Cache<span class="tsd-signature-symbol">(</span>target<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">DisplayObject</span>, margin<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/MasatoMakino/createjs-cache-util/blob/a6d3dc0/src/createjs-text-cache.ts#L62">createjs-text-cache.ts:62</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>対象のディスプレイオブジェクトを、指定されたマージンの範囲でキャッシュする。
+									キャッシュはupdateではなくuncacheを行い、キャッシュサイズも変更する。</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>target: <span class="tsd-signature-type">DisplayObject</span></h5>
+								</li>
+								<li>
+									<h5>margin: <span class="tsd-signature-type">number</span></h5>
+									<div class="tsd-comment tsd-typography">
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-static">
 					<a name="setfilter" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagStatic">Static</span> set<wbr>Filter</h3>
@@ -214,7 +212,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/MasatoMakino/createjs-cache-util/blob/0734849/src/createjs-text-cache.ts#L12">createjs-text-cache.ts:12</a></li>
+									<li>Defined in <a href="https://github.com/MasatoMakino/createjs-cache-util/blob/a6d3dc0/src/createjs-text-cache.ts#L11">createjs-text-cache.ts:11</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -267,10 +265,10 @@
 								<a href="_createjs_text_cache_.createjscacheutil.html#cachetext" class="tsd-kind-icon">cache<wbr>Text</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private tsd-is-static">
-								<a href="_createjs_text_cache_.createjscacheutil.html#cachewithmargin" class="tsd-kind-icon">cache<wbr>With<wbr>Margin</a>
+								<a href="_createjs_text_cache_.createjscacheutil.html#isneedupdate" class="tsd-kind-icon">is<wbr>Need<wbr>Update</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private tsd-is-static">
-								<a href="_createjs_text_cache_.createjscacheutil.html#isneedupdate" class="tsd-kind-icon">is<wbr>Need<wbr>Update</a>
+								<a href="_createjs_text_cache_.createjscacheutil.html#refreshcache" class="tsd-kind-icon">refresh<wbr>Cache</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-static">
 								<a href="_createjs_text_cache_.createjscacheutil.html#setfilter" class="tsd-kind-icon">set<wbr>Filter</a>
