@@ -18,6 +18,13 @@ export declare class CreatejsCacheUtil {
      */
     static cacheText(target: createjs.Text, value: string, option?: CacheTextOption): void;
     /**
+     * 対象のディスプレイオブジェクトを、指定されたバウンディングボックスの範囲でキャッシュする。
+     * @param {createjs.DisplayObject} target
+     * @param {createjs.Rectangle} bounds
+     * @param {number} margin
+     */
+    private static cacheWithMargin;
+    /**
      * キャッシュの更新が必要か否かを判定する。
      * cacheText関数の内部処理。
      *

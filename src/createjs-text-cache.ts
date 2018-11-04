@@ -1,5 +1,6 @@
 import DisplayObject = createjs.DisplayObject;
 import Text = createjs.Text;
+import Rectangle = createjs.Rectangle;
 
 export class CreatejsCacheUtil {
   /**
@@ -17,12 +18,7 @@ export class CreatejsCacheUtil {
 
     if (!target.cacheCanvas) {
       const bounds = target.getBounds();
-      target.cache(
-        bounds.x - margin,
-        bounds.y - margin,
-        bounds.width + margin * 2,
-        bounds.height + margin * 2
-      );
+      this.cacheWithMargin(target, bounds, margin);
     } else {
       target.updateCache();
     }
@@ -47,9 +43,7 @@ export class CreatejsCacheUtil {
 
     //文字とカラーの更新
     target.text = value;
-    if (target.color !== option.color) {
-      target.color = option.color;
-    }
+    target.color = option.color;
 
     //すでにキャッシュ済みで同じ文字列を入力するならキャッシュの更新で終了
     if (target.cacheCanvas && target.text === value) {
@@ -63,19 +57,27 @@ export class CreatejsCacheUtil {
     const bounds = target.getBounds();
 
     //空文字などサイズが計測不能な場合はキャッシュするのを諦めて処理を中断。
-    if (bounds === null || bounds === undefined) {
-      if (target.cacheCanvas) {
-        target.uncache();
-      }
-      return;
-    }
+    if (bounds == null) return;
 
-    //文言が異なる場合は再キャッシュ。
+    this.cacheWithMargin(target, bounds, option.margin);
+  }
+
+  /**
+   * 対象のディスプレイオブジェクトを、指定されたバウンディングボックスの範囲でキャッシュする。
+   * @param {createjs.DisplayObject} target
+   * @param {createjs.Rectangle} bounds
+   * @param {number} margin
+   */
+  private static cacheWithMargin(
+    target: DisplayObject,
+    bounds: Rectangle,
+    margin: number
+  ): void {
     target.cache(
-      bounds.x - option.margin,
-      bounds.y - option.margin,
-      bounds.width + option.margin * 2,
-      bounds.height + option.margin * 2
+      bounds.x - margin,
+      bounds.y - margin,
+      bounds.width + margin * 2,
+      bounds.height + margin * 2
     );
   }
 
