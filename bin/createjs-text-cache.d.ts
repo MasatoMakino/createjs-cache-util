@@ -1,5 +1,6 @@
 /// <reference types="easeljs" />
 import DisplayObject = createjs.DisplayObject;
+import Text = createjs.Text;
 export declare class CreatejsCacheUtil {
     /**
      * フィルタ適用のためのキャッシュを生成する。
@@ -15,9 +16,30 @@ export declare class CreatejsCacheUtil {
      * @param {string} value
      * @param option オプション　marginはテキスト周囲のキャッシュのマージンサイズ colorはテキスト色
      */
-    static cacheText(target: createjs.Text, value: string, option?: {
-        margin?: number;
-        color?: string;
-    }): void;
+    static cacheText(target: createjs.Text, value: string, option?: CacheTextOption): void;
+    /**
+     * キャッシュの更新が必要か否かを判定する。
+     * cacheText関数の内部処理。
+     *
+     * @param {createjs.Text} target
+     * @param {string} value
+     * @param {CacheTextOption} option
+     * @returns {boolean}
+     */
+    private static isNeedUpdate;
+}
+/**
+ * CreatejsCacheUtil.cacheText関数のためのオプション。
+ */
+export declare class CacheTextOption {
+    margin?: number;
+    color?: string;
+    /**
+     * 不足している値をデフォルト値で埋める。
+     * @param {createjs.Text} target
+     * @param {CacheTextOption} option
+     * @returns {CacheTextOption}
+     */
+    static init(target: Text, option?: CacheTextOption): CacheTextOption;
 }
 //# sourceMappingURL=createjs-text-cache.d.ts.map

@@ -1,4 +1,5 @@
 import DisplayObject = createjs.DisplayObject;
+import Text = createjs.Text;
 
 export class CreatejsCacheUtil {
   /**
@@ -37,36 +38,12 @@ export class CreatejsCacheUtil {
   public static cacheText(
     target: createjs.Text,
     value: string,
-    option?: {
-      margin?: number;
-      color?: string;
-    }
+    option?: CacheTextOption
   ): void {
     if (!target) return;
 
-    //optionのデフォルト値を追加。
-    if (!option) {
-      option = {};
-    }
-    if (!option.margin) {
-      option.margin = 8;
-    }
-    if (!option.color) {
-      option.color = target.color;
-    }
-
-    //状態が同一か確認
-    let isSame: boolean = true;
-    const isSameString: boolean = target.text === value;
-    if (!isSameString) isSame = false;
-
-    if (target.color !== option.color) {
-      isSame = false;
-    }
-    if (isSame) {
-      //状態が全く同じなら更新をせずに終了
-      return;
-    }
+    option = CacheTextOption.init(target, option);
+    if (!this.isNeedUpdate(target, value, option)) return;
 
     //文字とカラーの更新
     target.text = value;
@@ -75,7 +52,7 @@ export class CreatejsCacheUtil {
     }
 
     //すでにキャッシュ済みで同じ文字列を入力するならキャッシュの更新で終了
-    if (target.cacheCanvas && isSameString) {
+    if (target.cacheCanvas && target.text === value) {
       target.updateCache();
       return;
     }
@@ -100,5 +77,50 @@ export class CreatejsCacheUtil {
       bounds.width + option.margin * 2,
       bounds.height + option.margin * 2
     );
+  }
+
+  /**
+   * キャッシュの更新が必要か否かを判定する。
+   * cacheText関数の内部処理。
+   *
+   * @param {createjs.Text} target
+   * @param {string} value
+   * @param {CacheTextOption} option
+   * @returns {boolean}
+   */
+  private static isNeedUpdate(
+    target: Text,
+    value: string,
+    option: CacheTextOption
+  ): boolean {
+    //キャッシュが行われていないなら強制的にキャッシュを更新。
+    if (!target.cacheCanvas) return true;
+
+    //状態が同一か確認
+    if (target.text !== value) return true;
+    if (target.color !== option.color) return true;
+    return false;
+  }
+}
+
+/**
+ * CreatejsCacheUtil.cacheText関数のためのオプション。
+ */
+export class CacheTextOption {
+  margin?: number;
+  color?: string;
+
+  /**
+   * 不足している値をデフォルト値で埋める。
+   * @param {createjs.Text} target
+   * @param {CacheTextOption} option
+   * @returns {CacheTextOption}
+   */
+  public static init(target: Text, option?: CacheTextOption): CacheTextOption {
+    if (option == null) option = {};
+    if (option.margin == null) option.margin = 8;
+    if (!option.color) option.color = target.color;
+
+    return option;
   }
 }
