@@ -7,8 +7,9 @@ export declare class CreatejsCacheUtil {
      * @param {createjs.DisplayObject} target
      * @param {createjs.Filter[]} filters
      * @param {number} margin
+     * @param {number} scale
      */
-    static setFilter(target: DisplayObject, filters: createjs.Filter[], margin?: number): void;
+    static setFilter(target: DisplayObject, filters: createjs.Filter[], margin?: number, scale?: number): void;
     /**
      * テキストオブジェクトのキャッシュと更新を行う。
      * テキストに変化がない場合は処理をスキップする。
@@ -23,8 +24,15 @@ export declare class CreatejsCacheUtil {
      *
      * @param {createjs.DisplayObject} target
      * @param {number} margin
+     * @param {number} scale
      */
     private static refreshCache;
+    /**
+     * キャッシュ用の座標を取得。
+     * @param target
+     * @param margin
+     */
+    private static getRect;
     /**
      * キャッシュの更新が必要か否かを判定する。
      * cacheText関数の内部処理。
@@ -42,6 +50,7 @@ export declare class CreatejsCacheUtil {
 export declare class CacheTextOption {
     margin?: number;
     color?: string;
+    scale?: number;
     /**
      * 不足している値をデフォルト値で埋める。
      * @param {createjs.Text} target

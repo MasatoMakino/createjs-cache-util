@@ -4,11 +4,12 @@ export class CreatejsCacheUtil {
      * @param {createjs.DisplayObject} target
      * @param {createjs.Filter[]} filters
      * @param {number} margin
+     * @param {number} scale
      */
-    static setFilter(target, filters, margin = 8) {
+    static setFilter(target, filters, margin = 8, scale = 1) {
         target.filters = filters;
-        if (!target.cacheCanvas) {
-            this.refreshCache(target, margin);
+        if (!target.bitmapCache) {
+            this.refreshCache(target, margin, scale);
         }
         else {
             target.updateCache();
@@ -36,7 +37,7 @@ export class CreatejsCacheUtil {
             target.updateCache();
             return;
         }
-        this.refreshCache(target, option.margin);
+        this.refreshCache(target, option.margin, option.scale);
     }
     /**
      * 対象のディスプレイオブジェクトを、指定されたマージンの範囲でキャッシュする。
@@ -44,16 +45,33 @@ export class CreatejsCacheUtil {
      *
      * @param {createjs.DisplayObject} target
      * @param {number} margin
+     * @param {number} scale
      */
-    static refreshCache(target, margin) {
+    static refreshCache(target, margin, scale) {
         //キャッシュのサイズ更新が必要な場合はアンキャッシュを行う。
         //アンキャッシュ前にgetBoundsを呼ぶと、変更済みのサイズではなくキャッシュのバウンディングボックスが返ってくるため。
         target.uncache();
-        const bounds = target.getBounds();
+        const rect = this.getRect(target, margin);
         //targetが空文字などサイズが計測不能な場合はキャッシュするのを諦めて処理を中断。
-        if (bounds == null)
+        if (rect == null)
             return;
-        target.cache(bounds.x - margin, bounds.y - margin, bounds.width + margin * 2, bounds.height + margin * 2);
+        target.cache(rect.x, rect.y, rect.width, rect.height, scale);
+    }
+    /**
+     * キャッシュ用の座標を取得。
+     * @param target
+     * @param margin
+     */
+    static getRect(target, margin) {
+        const bounds = target.getBounds();
+        if (bounds == null)
+            return null;
+        return {
+            x: bounds.x - margin,
+            y: bounds.y - margin,
+            width: bounds.width + margin * 2,
+            height: bounds.height + margin * 2
+        };
     }
     /**
      * キャッシュの更新が必要か否かを判定する。
@@ -66,12 +84,16 @@ export class CreatejsCacheUtil {
      */
     static isNeedUpdate(target, value, option) {
         //キャッシュが行われていないなら強制的にキャッシュを更新。
-        if (!target.cacheCanvas)
+        if (!target.bitmapCache)
             return true;
         //状態が同一か確認
         if (target.text !== value)
             return true;
         if (target.color !== option.color)
+            return true;
+        //スケール値が存在し、かつ同一かを確認
+        const cacheScale = target.bitmapCache.scale; //2019/05/03 bitmapCache.scaleプロパティは非公開である。将来的に取得できなくなる可能性がある。
+        if (cacheScale != null && cacheScale !== option.scale)
             return true;
         return false;
     }
@@ -93,6 +115,8 @@ export class CacheTextOption {
             option.margin = 8;
         if (!option.color)
             option.color = target.color;
+        if (option.scale == null)
+            option.scale = 1;
         return option;
     }
 }

@@ -46,7 +46,7 @@ const onDomContentsLoaded = () => {
   const updateStage = () => {
     if (texts) {
       for (let text of texts) {
-        CreatejsCacheUtil.cacheText(text, r);
+        CreatejsCacheUtil.cacheText(text, r, { scale: 2 });
       }
     }
     stats.begin();
