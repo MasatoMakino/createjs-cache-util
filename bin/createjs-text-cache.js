@@ -28,10 +28,11 @@ export class CreatejsCacheUtil {
         if (!this.isNeedUpdate(target, value, option))
             return;
         //文字とカラーの更新
+        const currentText = target.text;
         target.text = value;
         target.color = option.color;
         //すでにキャッシュ済みで同じ文字列を入力するならキャッシュの更新で終了
-        if (target.cacheCanvas && target.text === value) {
+        if (target.bitmapCache && currentText === value) {
             target.updateCache();
             return;
         }
