@@ -29,7 +29,7 @@ export class CreatejsCacheUtil {
    * テキストに変化がない場合は処理をスキップする。
    * @param {createjs.Text} target
    * @param {string} value
-   * @param option オプション　marginはテキスト周囲のキャッシュのマージンサイズ colorはテキスト色
+   * @param {CacheTextOption} option
    */
   public static cacheText(
     target: createjs.Text,
@@ -133,9 +133,18 @@ export class CreatejsCacheUtil {
  * CreatejsCacheUtil.cacheText関数のためのオプション。
  */
 export class CacheTextOption {
+  /**
+   * キャッシュの上下左右のマージン。単位ピクセル。既定値8。
+   */
   margin?: number;
+  /**
+   * テキストカラー。既定値はテキストオブジェクトのカラーを引き継ぐ。
+   */
   color?: string;
-  scale?: number; //キャッシュのスケール。指定された倍率のビットマップキャッシュが生成される。既定値1。
+  /**
+   * キャッシュのスケール。指定された倍率のビットマップキャッシュが生成される。既定値1。
+   */
+  scale?: number;
 
   /**
    * 不足している値をデフォルト値で埋める。
