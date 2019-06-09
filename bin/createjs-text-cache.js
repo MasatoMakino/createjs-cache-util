@@ -20,7 +20,7 @@ export class CreatejsCacheUtil {
      * テキストに変化がない場合は処理をスキップする。
      * @param {createjs.Text} target
      * @param {string} value
-     * @param option オプション　marginはテキスト周囲のキャッシュのマージンサイズ colorはテキスト色
+     * @param {CacheTextOption} option
      */
     static cacheText(target, value, option) {
         if (!target)
