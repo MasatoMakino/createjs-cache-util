@@ -1,24 +1,27 @@
 import DisplayObject = createjs.DisplayObject;
 import Text = createjs.Text;
+import Shape = createjs.Shape;
 
 export class CreatejsCacheUtil {
   /**
    * フィルタ適用のためのキャッシュを生成する。
-   * @param {createjs.DisplayObject} target
-   * @param {createjs.Filter[]} filters
-   * @param {number} margin
-   * @param {number} scale
+   * @param target
+   * @param filters
+   * @param margin
+   * @param scale
+   * @param addHitArea
    */
   public static setFilter(
     target: DisplayObject,
     filters: createjs.Filter[],
     margin: number = 8,
-    scale: number = 1
+    scale: number = 1,
+    addHitArea: boolean = false
   ): void {
     target.filters = filters;
 
     if (!target.bitmapCache) {
-      this.refreshCache(target, margin, scale);
+      this.refreshCache(target, margin, scale, addHitArea);
     } else {
       target.updateCache();
     }
@@ -52,21 +55,23 @@ export class CreatejsCacheUtil {
       return;
     }
 
-    this.refreshCache(target, option.margin, option.scale);
+    this.refreshCache(target, option.margin, option.scale, option.addHitArea);
   }
 
   /**
    * 対象のディスプレイオブジェクトを、指定されたマージンの範囲でキャッシュする。
    * キャッシュはupdateではなくuncacheを行い、キャッシュサイズも変更する。
    *
-   * @param {createjs.DisplayObject} target
-   * @param {number} margin
-   * @param {number} scale
+   * @param target
+   * @param margin
+   * @param scale
+   * @param addHitArea
    */
   private static refreshCache(
     target: DisplayObject,
     margin: number,
-    scale: number
+    scale: number,
+    addHitArea: boolean
   ): void {
     //キャッシュのサイズ更新が必要な場合はアンキャッシュを行う。
     //アンキャッシュ前にgetBoundsを呼ぶと、変更済みのサイズではなくキャッシュのバウンディングボックスが返ってくるため。
@@ -78,6 +83,10 @@ export class CreatejsCacheUtil {
     if (rect == null) return;
 
     target.cache(rect.x, rect.y, rect.width, rect.height, scale);
+
+    if (addHitArea) {
+      CreatejsCacheUtil.addHitArea(target, rect);
+    }
   }
 
   /**
@@ -98,6 +107,18 @@ export class CreatejsCacheUtil {
       width: bounds.width + margin * 2,
       height: bounds.height + margin * 2
     };
+  }
+
+  private static addHitArea(
+    target: DisplayObject,
+    rect: { x: number; y: number; width: number; height: number }
+  ): void {
+    const shape = new Shape();
+    shape.graphics
+      .beginFill("#000")
+      .drawRect(rect.x, rect.y, rect.width, rect.height)
+      .endFill();
+    target.hitArea = shape;
   }
 
   /**
@@ -145,6 +166,10 @@ export class CacheTextOption {
    * キャッシュのスケール。指定された倍率のビットマップキャッシュが生成される。既定値1。
    */
   scale?: number;
+  /**
+   * ヒット領域を追加するか否か。既定値false
+   */
+  addHitArea?: boolean;
 
   /**
    * 不足している値をデフォルト値で埋める。
@@ -157,6 +182,7 @@ export class CacheTextOption {
     if (option.margin == null) option.margin = 8;
     if (!option.color) option.color = target.color;
     if (option.scale == null) option.scale = 1;
+    if (option.addHitArea == null) option.addHitArea = false;
 
     return option;
   }
