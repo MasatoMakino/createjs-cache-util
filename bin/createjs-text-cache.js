@@ -1,15 +1,17 @@
+var Shape = createjs.Shape;
 export class CreatejsCacheUtil {
     /**
      * フィルタ適用のためのキャッシュを生成する。
-     * @param {createjs.DisplayObject} target
-     * @param {createjs.Filter[]} filters
-     * @param {number} margin
-     * @param {number} scale
+     * @param target
+     * @param filters
+     * @param margin
+     * @param scale
+     * @param addHitArea
      */
-    static setFilter(target, filters, margin = 8, scale = 1) {
+    static setFilter(target, filters, margin = 8, scale = 1, addHitArea = false) {
         target.filters = filters;
         if (!target.bitmapCache) {
-            this.refreshCache(target, margin, scale);
+            this.refreshCache(target, margin, scale, addHitArea);
         }
         else {
             target.updateCache();
@@ -37,17 +39,18 @@ export class CreatejsCacheUtil {
             target.updateCache();
             return;
         }
-        this.refreshCache(target, option.margin, option.scale);
+        this.refreshCache(target, option.margin, option.scale, option.addHitArea);
     }
     /**
      * 対象のディスプレイオブジェクトを、指定されたマージンの範囲でキャッシュする。
      * キャッシュはupdateではなくuncacheを行い、キャッシュサイズも変更する。
      *
-     * @param {createjs.DisplayObject} target
-     * @param {number} margin
-     * @param {number} scale
+     * @param target
+     * @param margin
+     * @param scale
+     * @param addHitArea
      */
-    static refreshCache(target, margin, scale) {
+    static refreshCache(target, margin, scale, addHitArea) {
         //キャッシュのサイズ更新が必要な場合はアンキャッシュを行う。
         //アンキャッシュ前にgetBoundsを呼ぶと、変更済みのサイズではなくキャッシュのバウンディングボックスが返ってくるため。
         target.uncache();
@@ -56,6 +59,9 @@ export class CreatejsCacheUtil {
         if (rect == null)
             return;
         target.cache(rect.x, rect.y, rect.width, rect.height, scale);
+        if (addHitArea) {
+            CreatejsCacheUtil.addHitArea(target, rect);
+        }
     }
     /**
      * キャッシュ用の座標を取得。
@@ -72,6 +78,14 @@ export class CreatejsCacheUtil {
             width: bounds.width + margin * 2,
             height: bounds.height + margin * 2
         };
+    }
+    static addHitArea(target, rect) {
+        const shape = new Shape();
+        shape.graphics
+            .beginFill("#000")
+            .drawRect(rect.x, rect.y, rect.width, rect.height)
+            .endFill();
+        target.hitArea = shape;
     }
     /**
      * キャッシュの更新が必要か否かを判定する。
@@ -117,6 +131,8 @@ export class CacheTextOption {
             option.color = target.color;
         if (option.scale == null)
             option.scale = 1;
+        if (option.addHitArea == null)
+            option.addHitArea = false;
         return option;
     }
 }

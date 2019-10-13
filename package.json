@@ -1,6 +1,6 @@
 {
   "name": "createjs-cache-util",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "main": "./bin/createjs-text-cache.js",
   "types": "./bin/createjs-text-cache.d.ts",
   "repository": "https://MasatoMakino@github.com/MasatoMakino/createjs-cache-util.git",

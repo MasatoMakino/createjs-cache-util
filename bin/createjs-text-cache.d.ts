@@ -4,12 +4,13 @@ import Text = createjs.Text;
 export declare class CreatejsCacheUtil {
     /**
      * フィルタ適用のためのキャッシュを生成する。
-     * @param {createjs.DisplayObject} target
-     * @param {createjs.Filter[]} filters
-     * @param {number} margin
-     * @param {number} scale
+     * @param target
+     * @param filters
+     * @param margin
+     * @param scale
+     * @param addHitArea
      */
-    static setFilter(target: DisplayObject, filters: createjs.Filter[], margin?: number, scale?: number): void;
+    static setFilter(target: DisplayObject, filters: createjs.Filter[], margin?: number, scale?: number, addHitArea?: boolean): void;
     /**
      * テキストオブジェクトのキャッシュと更新を行う。
      * テキストに変化がない場合は処理をスキップする。
@@ -22,9 +23,10 @@ export declare class CreatejsCacheUtil {
      * 対象のディスプレイオブジェクトを、指定されたマージンの範囲でキャッシュする。
      * キャッシュはupdateではなくuncacheを行い、キャッシュサイズも変更する。
      *
-     * @param {createjs.DisplayObject} target
-     * @param {number} margin
-     * @param {number} scale
+     * @param target
+     * @param margin
+     * @param scale
+     * @param addHitArea
      */
     private static refreshCache;
     /**
@@ -33,6 +35,7 @@ export declare class CreatejsCacheUtil {
      * @param margin
      */
     private static getRect;
+    private static addHitArea;
     /**
      * キャッシュの更新が必要か否かを判定する。
      * cacheText関数の内部処理。
@@ -60,6 +63,10 @@ export declare class CacheTextOption {
      * キャッシュのスケール。指定された倍率のビットマップキャッシュが生成される。既定値1。
      */
     scale?: number;
+    /**
+     * ヒット領域を追加するか否か。既定値false
+     */
+    addHitArea?: boolean;
     /**
      * 不足している値をデフォルト値で埋める。
      * @param {createjs.Text} target
