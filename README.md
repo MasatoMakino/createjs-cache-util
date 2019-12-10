@@ -2,15 +2,14 @@
 
 A module for caching and update bitmap text on change.
 
-　[![Maintainability](https://api.codeclimate.com/v1/badges/aa68e67573e06757daf2/maintainability)](https://codeclimate.com/github/MasatoMakino/createjs-cache-util/maintainability)
+[![Maintainability](https://api.codeclimate.com/v1/badges/aa68e67573e06757daf2/maintainability)](https://codeclimate.com/github/MasatoMakino/createjs-cache-util/maintainability)
 [![MIT License](http://img.shields.io/badge/license-MIT-blue.svg?style=flat)](LICENSE)
 
 [Github repository](https://github.com/MasatoMakino/createjs-cache-util)
 
-
 ## Demo
 
-[Demo Page](https://masatomakino.github.io/createjs-cache-util/demo/index.html)
+[Demo Page](https://masatomakino.github.io/createjs-cache-util/demo/)
 
 ### Install
 
@@ -47,11 +46,12 @@ import { CreatejsCacheUtil } from "createjs-cache-util";
 ```js
 CreatejsCacheUtil.cacheText(textField, "textContents");
 ```
-if contents is updated, textField.cacheCanvas will update. 
+
+if contents is updated, textField.cacheCanvas will update.
 
 [API documents](https://masatomakino.github.io/createjs-cache-util/api/)
 
-see also [demo script](https://masatomakino.github.io/createjs-cache-util/demo/main.js).
+see also [demo script](demoSrc/demo.js).
 
 ## License
 
