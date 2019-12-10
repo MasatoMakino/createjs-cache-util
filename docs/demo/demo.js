@@ -81,7 +81,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = "./docs/demo/main.js");
+/******/ 	return __webpack_require__(__webpack_require__.s = "./demoSrc/demo.js");
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -98,15 +98,15 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) *
 
 /***/ }),
 
-/***/ "./docs/demo/main.js":
-/*!***************************!*\
-  !*** ./docs/demo/main.js ***!
-  \***************************/
+/***/ "./demoSrc/demo.js":
+/*!*************************!*\
+  !*** ./demoSrc/demo.js ***!
+  \*************************/
 /*! no exports provided */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _bin_createjs_text_cache__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../bin/createjs-text-cache */ \"./bin/createjs-text-cache.js\");\n\n\nconst getRandomString = length => {\n  // 生成する文字列に含める文字セット\n  const c = \"abcdefghijklmnopqrstuvwxyz0123456789\";\n  const cl = c.length;\n  let randomString = \"\";\n\n  for (let i = 0; i < length; i++) {\n    randomString += c[Math.floor(Math.random() * cl)];\n  }\n\n  return randomString;\n};\n\nconst initTexts = stage => {\n  const texts = [];\n\n  for (let i = 0; i < 40; i++) {\n    for (let j = 0; j < 30; j++) {\n      const text = new createjs.Text(\"\", \"16px Meiryo\", \"#000\");\n      text.x = i * 36;\n      text.y = j * 20;\n      text.addEventListener(\"click\", e => {\n        console.log(i, j);\n      });\n      _bin_createjs_text_cache__WEBPACK_IMPORTED_MODULE_0__[\"CreatejsCacheUtil\"].cacheText(text, \"TXT\");\n      stage.addChild(text);\n      texts.push(text);\n    }\n  }\n\n  return texts;\n};\n\nconst onDomContentsLoaded = () => {\n  const r = getRandomString(3); //ステージ更新処理\n\n  const updateStage = () => {\n    if (texts) {\n      for (let text of texts) {\n        _bin_createjs_text_cache__WEBPACK_IMPORTED_MODULE_0__[\"CreatejsCacheUtil\"].cacheText(text, r, {\n          scale: 2,\n          addHitArea: true\n        });\n      }\n    }\n\n    stage.update();\n  }; //Create.jsのグローバル設定\n\n\n  createjs.Ticker.timingMode = createjs.Ticker.RAF;\n  createjs.Text.prototype.snapToPixel = false; //stageの初期化\n\n  const canvas = document.getElementById(\"textCanvas\");\n  canvas.width = 1280;\n  canvas.height = 480;\n  const stage = new createjs.Stage(canvas);\n  createjs.Ticker.on(\"tick\", updateStage);\n  const texts = initTexts(stage);\n};\n/**\n * DOMContentLoaded以降に初期化処理を実行する\n */\n\n\nif (document.readyState !== \"loading\") {\n  onDomContentsLoaded();\n} else {\n  document.addEventListener(\"DOMContentLoaded\", onDomContentsLoaded);\n}\n\n//# sourceURL=webpack:///./docs/demo/main.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _bin_createjs_text_cache__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../bin/createjs-text-cache */ \"./bin/createjs-text-cache.js\");\n\n\nconst getRandomString = length => {\n  // 生成する文字列に含める文字セット\n  const c = \"abcdefghijklmnopqrstuvwxyz0123456789\";\n  const cl = c.length;\n  let randomString = \"\";\n\n  for (let i = 0; i < length; i++) {\n    randomString += c[Math.floor(Math.random() * cl)];\n  }\n\n  return randomString;\n};\n\nconst initTexts = stage => {\n  const texts = [];\n\n  for (let i = 0; i < 40; i++) {\n    for (let j = 0; j < 30; j++) {\n      const text = new createjs.Text(\"\", \"16px Meiryo\", \"#000\");\n      text.x = i * 36;\n      text.y = j * 20;\n      text.addEventListener(\"click\", e => {\n        console.log(i, j);\n      });\n      _bin_createjs_text_cache__WEBPACK_IMPORTED_MODULE_0__[\"CreatejsCacheUtil\"].cacheText(text, \"TXT\");\n      stage.addChild(text);\n      texts.push(text);\n    }\n  }\n\n  return texts;\n};\n\nconst onDomContentsLoaded = () => {\n  const r = getRandomString(3); //ステージ更新処理\n\n  const updateStage = () => {\n    if (texts) {\n      for (let text of texts) {\n        _bin_createjs_text_cache__WEBPACK_IMPORTED_MODULE_0__[\"CreatejsCacheUtil\"].cacheText(text, r, {\n          scale: 2,\n          addHitArea: true\n        });\n      }\n    }\n\n    stage.update();\n  }; //Create.jsのグローバル設定\n\n\n  createjs.Ticker.timingMode = createjs.Ticker.RAF;\n  createjs.Text.prototype.snapToPixel = false; //stageの初期化\n\n  const canvas = document.getElementById(\"textCanvas\");\n  canvas.width = 1280;\n  canvas.height = 480;\n  const stage = new createjs.Stage(canvas);\n  createjs.Ticker.on(\"tick\", updateStage);\n  const texts = initTexts(stage);\n};\n/**\n * DOMContentLoaded以降に初期化処理を実行する\n */\n\n\nif (document.readyState !== \"loading\") {\n  onDomContentsLoaded();\n} else {\n  document.addEventListener(\"DOMContentLoaded\", onDomContentsLoaded);\n}\n\n//# sourceURL=webpack:///./demoSrc/demo.js?");
 
 /***/ })
 
