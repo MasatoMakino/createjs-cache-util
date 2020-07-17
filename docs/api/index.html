@@ -81,7 +81,7 @@
 				<p>createjs-cache-util depend on <a href="https://github.com/CreateJS/EaselJS">CreateJS / EaselJS</a></p>
 				<pre><code class="language-bash">npm install easeljs --save-dev</code></pre>
 				<p>or load script files in html.</p>
-				<pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"https://code.createjs.com/1.0.0/easeljs.min.js"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></code></pre>
+				<pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;https://code.createjs.com/1.0.0/easeljs.min.js&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></code></pre>
 				<p>and</p>
 				<pre><code class="language-bash">npm install https://github.com/MasatoMakino/createjs-cache-util.git --save-dev</code></pre>
 				<a href="#import" id="import" style="color: inherit; text-decoration: none;">
@@ -89,11 +89,11 @@
 				</a>
 				<p>createjs-cache-util is composed of ES6 modules and TypeScript d.ts files.</p>
 				<p>At first, import classes.</p>
-				<pre><code class="language-js"><span class="hljs-keyword">import</span> { CreatejsCacheUtil } <span class="hljs-keyword">from</span> <span class="hljs-string">"createjs-cache-util"</span>;</code></pre>
+				<pre><code class="language-js"><span class="hljs-keyword">import</span> { CreatejsCacheUtil } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;createjs-cache-util&quot;</span>;</code></pre>
 				<a href="#cache-a-text" id="cache-a-text" style="color: inherit; text-decoration: none;">
 					<h3>Cache a text</h3>
 				</a>
-				<pre><code class="language-js">CreatejsCacheUtil.cacheText(textField, <span class="hljs-string">"textContents"</span>);</code></pre>
+				<pre><code class="language-js">CreatejsCacheUtil.cacheText(textField, <span class="hljs-string">&quot;textContents&quot;</span>);</code></pre>
 				<p>if contents is updated, textField.cacheCanvas will update.</p>
 				<p><a href="https://masatomakino.github.io/createjs-cache-util/api/">API documents</a></p>
 				<p>see also <a href="demoSrc/demo.js">demo script</a>.</p>
@@ -151,6 +151,5 @@
 </div>
 <div class="overlay"></div>
 <script src="assets/js/main.js"></script>
-<script>if (location.protocol == 'file:') document.write('<script src="assets/js/search.js"><' + '/script>');</script>
 </body>
 </html>
