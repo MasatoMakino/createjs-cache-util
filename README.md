@@ -5,7 +5,7 @@ A module for caching and update bitmap text on change.
 [![Maintainability](https://api.codeclimate.com/v1/badges/aa68e67573e06757daf2/maintainability)](https://codeclimate.com/github/MasatoMakino/createjs-cache-util/maintainability)
 [![MIT License](http://img.shields.io/badge/license-MIT-blue.svg?style=flat)](LICENSE)
 
-[Github repository](https://github.com/MasatoMakino/createjs-cache-util)
+[![ReadMe Card](https://github-readme-stats.vercel.app/api/pin/?username=MasatoMakino&repo=createjs-cache-util&show_owner=true)](https://github.com/MasatoMakino/createjs-cache-util)
 
 ## Demo
 
