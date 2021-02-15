@@ -1,4 +1,4 @@
-import { CreatejsCacheUtil } from "../bin/createjs-text-cache";
+import {CreatejsCacheUtil} from "..";
 
 const getRandomString = length => {
   // 生成する文字列に含める文字セット
