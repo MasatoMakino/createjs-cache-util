@@ -1,6 +1,6 @@
 {
   "name": "createjs-cache-util",
-  "version": "0.1.6",
+  "version": "0.2.0",
   "main": "./bin/index.js",
   "types": "./bin/index.d.ts",
   "repository": "https://MasatoMakino@github.com/MasatoMakino/createjs-cache-util.git",
