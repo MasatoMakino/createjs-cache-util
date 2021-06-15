@@ -6,6 +6,9 @@
   "repository": "https://MasatoMakino@github.com/MasatoMakino/createjs-cache-util.git",
   "author": "MasatoMakino <unagiinu.g@gmail.com>",
   "description": "Bitmap Cache Utility for Createjs.text",
+  "files": [
+    "bin"
+  ],
   "keywords": [
     "createjs"
   ],
